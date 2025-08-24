@@ -9,10 +9,10 @@ HTML/CSS/JS のみで構成された Firebase Authentication によるログイ�
 
 ## 実行方法
 
-下記 URL から利用可能です
+下記 URL にて公開中です ( kidatti.github.io からのアクセス許可が必要です )
 - [https://kidatti.github.io/firestore-chacker/](https://kidatti.github.io/firestore-chacker/)
 
-個別に実行する場合は、ローカルサーバーを使用してください：
+個別に実行する場合は、ローカルサーバーを使用してください
 
 ```bash
 # Python 3を使用する場合
@@ -24,7 +24,7 @@ npx http-server
 # VS Code Live Serverなどを使用
 ```
 
-ブラウザで `http://localhost:8000` にアクセスしてください。
+ブラウザで `http://localhost:8000` 等アクセスして利用してください
 
 ### ログイン方法
 1. **メール/パスワードログイン**: 登録済みのメールアドレスとパスワードでログイン
