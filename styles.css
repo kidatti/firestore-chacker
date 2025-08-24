@@ -1,0 +1,747 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #ffffff;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.section {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e1e5e9;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 設定フォーム */
+.config-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.config-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 400;
+}
+
+.config-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.config-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.config-help {
+    margin-top: 30px;
+    border-top: 1px solid #e1e5e9;
+    padding-top: 20px;
+}
+
+.config-help details {
+    background: #f8f9fa;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.config-help summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.config-help summary:hover {
+    color: #0056b3;
+}
+
+.help-content {
+    margin-top: 15px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.help-content ol {
+    margin-left: 20px;
+}
+
+.help-content li {
+    margin-bottom: 8px;
+}
+
+/* タブ切り替え */
+.config-method-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #007bff;
+    background: #f8f9fa;
+}
+
+.tab-btn.active {
+    color: #007bff;
+    border-bottom-color: #007bff;
+}
+
+.config-method {
+    margin-bottom: 20px;
+}
+
+/* JSON入力エリア */
+.json-input-container {
+    position: relative;
+}
+
+#firebase-json {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+#firebase-json:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+#firebase-json.json-valid {
+    border-color: #28a745;
+}
+
+#firebase-json.json-invalid {
+    border-color: #dc3545;
+}
+
+.json-validation-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.json-validation-status.valid {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.json-validation-status.invalid {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.json-error-message {
+    margin-top: 8px;
+    padding: 10px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    color: #721c24;
+    font-size: 14px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    line-height: 1.4;
+    display: none;
+}
+
+.json-error-message.show {
+    display: block;
+}
+
+.json-help {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.json-help p {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    color: #333;
+}
+
+.json-help ul {
+    margin: 0;
+    padding-left: 20px;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.json-help li {
+    margin-bottom: 5px;
+}
+
+.json-help code {
+    background: #e9ecef;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 12px;
+    color: #d63384;
+}
+
+/* 保存された設定状態表示 */
+.saved-config-status {
+    background: #e6f3ff;
+    border: 1px solid #b8daff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.status-header h3 {
+    margin: 0;
+    color: #0056b3;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.saved-config-info p {
+    margin: 8px 0;
+    color: #495057;
+    font-size: 14px;
+}
+
+.saved-config-info span {
+    color: #0056b3;
+    font-weight: 500;
+    word-break: break-all;
+}
+
+.config-note {
+    font-size: 12px !important;
+    color: #6c757d !important;
+    font-style: italic;
+    margin-top: 15px !important;
+}
+
+/* ログインフォーム */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: 400;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.button-group .btn {
+    width: 100%;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+}
+
+.btn.primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn.primary:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.btn.secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e1e5e9;
+}
+
+.btn.secondary:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.btn.small {
+    padding: 6px 12px;
+    font-size: 12px;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Google ログインスタイル */
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e1e5e9;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    color: #666;
+    font-size: 14px;
+    position: relative;
+}
+
+.google-login {
+    margin-top: 20px;
+}
+
+.btn.google {
+    width: 100%;
+    background: white;
+    color: #333;
+    border: 2px solid #e1e5e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 24px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn.google:hover {
+    background: #f8f9fa;
+    border-color: #dadce0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn.google:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.google-icon {
+    flex-shrink: 0;
+}
+
+/* ユーザー情報 */
+.user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.user-info span {
+    font-weight: 500;
+    color: #333;
+}
+
+.user-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user-info .btn {
+    flex: none;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* 設定変更セクション */
+.config-change-section {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e1e5e9;
+}
+
+/* 危険ボタン */
+.btn.danger {
+    background: #dc3545;
+    color: white;
+    border: 2px solid #dc3545;
+}
+
+.btn.danger:hover {
+    background: #c82333;
+    border-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* データセクション */
+.data-section h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 400;
+}
+
+/* コレクション一覧セクション */
+.collections-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e1e5e9;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: #333;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.collections-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.collection-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.collection-item:hover {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    transform: translateY(-1px);
+}
+
+.collection-name {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.collection-count {
+    font-size: 12px;
+    opacity: 0.8;
+    background: #e9ecef;
+    padding: 2px 6px;
+    border-radius: 10px;
+    color: #666;
+}
+
+.collection-item:hover .collection-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.no-collections, .loading-collections {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+    grid-column: 1 / -1;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: end;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.controls .form-group {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 0;
+}
+
+.controls .btn {
+    flex: none;
+    white-space: nowrap;
+}
+
+/* ローディング */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* エラーメッセージ */
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+/* データ表示 */
+.data-display {
+    margin-top: 20px;
+}
+
+.data-count {
+    margin-bottom: 15px;
+    font-weight: 500;
+    color: #666;
+    font-size: 14px;
+}
+
+.data-content {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.document {
+    background: white;
+    border: 1px solid #e1e5e9;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.document:last-child {
+    margin-bottom: 0;
+}
+
+.document-id {
+    font-weight: 600;
+    color: #667eea;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #e1e5e9;
+    padding-bottom: 8px;
+}
+
+.document-data {
+    font-family: 'Monaco', 'Menlo', monospace;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.no-data {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .section {
+        padding: 20px;
+    }
+    
+    .controls {
+        flex-direction: column;
+    }
+    
+    .controls .form-group {
+        min-width: auto;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .user-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .user-actions .btn {
+        width: 100%;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .collections-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    
+    .section-header h3 {
+        text-align: center;
+    }
+    
+    .status-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .status-header .btn {
+        width: 100%;
+    }
+}
