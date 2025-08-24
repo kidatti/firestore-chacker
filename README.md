@@ -9,7 +9,10 @@ HTML/CSS/JS のみで構成された Firebase Authentication によるログイ�
 
 ## 実行方法
 
-セキュリティ制約により、ファイルを直接ブラウザで開くのではなく、ローカルサーバーを使用してください：
+下記 URL から利用可能です
+- [https://kidatti.github.io/firestore-chacker/](https://kidatti.github.io/firestore-chacker/)
+
+個別に実行する場合は、ローカルサーバーを使用してください：
 
 ```bash
 # Python 3を使用する場合
